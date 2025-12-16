@@ -9,6 +9,7 @@ import java.net.URL;
 public class GameUtil {
     //存静态变量
     public static int width=1000,height=800,pwidth=50,pheight=50,locX=100,locY=100;
+    public static int bombNum;
 
     //构造器私有，防止创建实例
     private GameUtil() {}

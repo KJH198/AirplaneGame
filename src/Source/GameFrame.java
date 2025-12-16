@@ -16,14 +16,13 @@ public class GameFrame extends Frame {
 
     private Plane plane = new Plane(planeImg,100,100,pwidth,pheight,10);
     private Bomb[] bombs = new Bomb[20];
-    private int bombNum = 20;
+    private int bombNum;
     private Explode explode;
 
     private Date beginTime,endTime;
 
-
     //启动游戏窗口和监听器
-    public void launchGameFrame() {
+    public void launchGameFrame(int bombNum) {
         String title = "飞机大战";
         setTitle(title);
         setSize(width, height);
@@ -54,7 +53,8 @@ public class GameFrame extends Frame {
         //启动窗口绘制线程
         new PaintThread().start();
 
-        for(int i=0;i<bombNum;i++){
+        this.bombNum = bombNum;
+        for(int i = 0;i < this.bombNum;i++){
             bombs[i]=new Bomb();
         }
 
