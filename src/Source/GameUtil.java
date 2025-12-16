@@ -8,8 +8,7 @@ import java.net.URL;
 //工具包(不必实例化，仅调用静态方法)
 public class GameUtil {
     //存静态变量
-    public static int width=1000,height=800,pwidth=50,pheight=50,locX=100,locY=100;
-    public static int bombNum;
+    public static int width=1000,height=800,pwidth=40,pheight=40,locX=100,locY=100;
 
     //构造器私有，防止创建实例
     private GameUtil() {}

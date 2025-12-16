@@ -8,13 +8,14 @@ public class Bomb extends GameObject {
     boolean live = true;
 
 
-    public Bomb(){
+    public Bomb(boolean create) {
         degree = Math.random()*Math.PI*2;
-        x = 500;
-        y = 400;
+        if(create) y = 800;
+        else y = 30;
+        x = 1000;
         width = 10;
         height = 10;
-        speed = 10;
+        speed = 5;
     }
 
     @Override

@@ -14,8 +14,8 @@ public class GameFrame extends Frame {
     private final Image planeImg = GameUtil.getImage("Images/plane.png");
     private Image offScreenImage = null; //定义一个图片对象作为缓冲区
 
-    private Plane plane = new Plane(planeImg,100,100,pwidth,pheight,10);
-    private Bomb[] bombs = new Bomb[20];
+    private final Plane plane = new Plane(planeImg,100,100,pwidth,pheight,10);
+    private final Bomb[] bombs = new Bomb[20];
     private int bombNum;
     private Explode explode;
 
@@ -54,8 +54,10 @@ public class GameFrame extends Frame {
         new PaintThread().start();
 
         this.bombNum = bombNum;
+        boolean create = true;
         for(int i = 0;i < this.bombNum;i++){
-            bombs[i]=new Bomb();
+            bombs[i]=new Bomb(create);
+            create = !create;
         }
 
         beginTime = new Date();
@@ -69,12 +71,11 @@ public class GameFrame extends Frame {
         for(int i=0;i<bombNum;i++){
             bombs[i].drawObject(g);
             boolean peng = bombs[i].getRec().intersects(plane.getRec());
-            if(peng && plane.live) {
+            if(peng && plane.live && bombs[i].live) {
                 plane.live = false;
                 bombs[i].live = false;
                 explode = new Explode(plane.x,plane.y);
                 endTime = new Date();
-                break;
             }
         }
         if(explode!=null){
@@ -115,7 +116,7 @@ public class GameFrame extends Frame {
             while(true) {
                 repaint();  //重画窗口
                 try {
-                    Thread.sleep(20);  //20毫秒刷新一次
+                    Thread.sleep(10);  //10毫秒刷新一次
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     break;
