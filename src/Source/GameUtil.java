@@ -15,7 +15,7 @@ public class GameUtil {
 
     //静态方法，加载图片
     public static Image getImage(String path) {
-        Image img = null;
+        Image img;
         URL url = GameUtil.class.getClassLoader().getResource(path);
         try {
             img = ImageIO.read(url);

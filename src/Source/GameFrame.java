@@ -9,12 +9,11 @@ import static Source.GameUtil.*;
 import java.awt.event.KeyEvent;
 
 public class GameFrame extends Frame {
-    private Image bg = GameUtil.getImage("Images/background.jpg");
-    private Image planeImg = GameUtil.getImage("Images/plane.png");
+    private final Image bg = GameUtil.getImage("Images/background.jpg");
+    private final Image planeImg = GameUtil.getImage("Images/plane.png");
     private Image offScreenImage = null; //定义一个图片对象作为缓冲区
 
-    private int x=200,y=200;
-    private Plane plane = new Plane(planeImg,100,100,50,50,10);
+    private Plane plane = new Plane(planeImg,100,100,pwidth,pheight,10);
     private Bomb[] bombs = new Bomb[20];
     private int bombNum = 10;
     private Explode explode;
@@ -97,6 +96,7 @@ public class GameFrame extends Frame {
                     Thread.sleep(20);  //20毫秒刷新一次
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    break;
                 }
             }
         }
