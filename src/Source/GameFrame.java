@@ -7,6 +7,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import static Source.GameUtil.*;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 
 public class GameFrame extends Frame {
     private final Image bg = GameUtil.getImage("Images/background.jpg");
@@ -15,8 +16,10 @@ public class GameFrame extends Frame {
 
     private Plane plane = new Plane(planeImg,100,100,pwidth,pheight,10);
     private Bomb[] bombs = new Bomb[20];
-    private int bombNum = 10;
+    private int bombNum = 20;
     private Explode explode;
+
+    private Date beginTime,endTime;
 
 
     //启动游戏窗口和监听器
@@ -54,6 +57,8 @@ public class GameFrame extends Frame {
         for(int i=0;i<bombNum;i++){
             bombs[i]=new Bomb();
         }
+
+        beginTime = new Date();
     }
 
     //画窗口
@@ -68,12 +73,29 @@ public class GameFrame extends Frame {
                 plane.live = false;
                 bombs[i].live = false;
                 explode = new Explode(plane.x,plane.y);
+                endTime = new Date();
                 break;
             }
         }
         if(explode!=null){
             explode.drawObject(g);
+
+            int period = (int)((endTime.getTime() - beginTime.getTime())/1000);
+            printInfo(g,"游戏结束",100,width/2-200,height/2,Color.RED);
+            printInfo(g,"存活时间:"+period+"秒",50,width/2-150,height/2+100,Color.GREEN);
         }
+    }
+
+    public void printInfo(Graphics g,String str,int size,int x,int y,Color c){
+        Color cpy = g.getColor();
+        Font f = g.getFont();
+
+        g.setColor(c);
+        g.setFont(new Font("宋体",Font.BOLD,size));
+        g.drawString(str,x,y);
+
+        g.setColor(cpy);
+        g.setFont(f);
     }
 
     //双缓冲技术解决屏闪问题

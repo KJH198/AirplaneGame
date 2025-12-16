@@ -28,8 +28,8 @@ public class Bomb extends GameObject {
     }
 
     public void move(){
-        x += speed * (int)Math.cos(degree);
-        y += speed * (int)Math.sin(degree);
+        x += speed * Math.cos(degree);
+        y += speed * Math.sin(degree);
         if (x < 0){
             x = 0;
             degree = Math.PI - degree;
