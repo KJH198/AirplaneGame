@@ -99,7 +99,7 @@ public class GameFrame extends Frame {
         g.setFont(f);
     }
 
-    //双缓冲技术解决屏闪问题
+    //缓冲技术解决屏闪问题
     @Override
     public void update(Graphics g) {
         if(offScreenImage == null)
